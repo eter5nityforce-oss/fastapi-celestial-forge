@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestial Forge - Lobby</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>The Forge Lobby</h1>
+        <p id="welcome-msg"></p>
+
+        <button onclick="createGame()">New Battle vs AI</button>
+        <!-- Multiplayer matchmaking could go here -->
+
+        <button onclick="logout()" style="margin-top: 20px; background: #333; color: white;">Logout</button>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script>
+        const user = localStorage.getItem("username");
+        if (!user) window.location.href = "/static/index.html";
+        document.getElementById("welcome-msg").innerText = `Welcome, Blacksmith ${user}`;
+
+        async function createGame() {
+            try {
+                const data = await api.createGame();
+                window.location.href = `/static/game.html?game_id=${data.game_id}`;
+            } catch (e) {
+                alert(e.message);
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "/static/index.html";
+        }
+    </script>
+</body>
+</html>
