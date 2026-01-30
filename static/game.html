@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestial Forge - Battle</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Opponent Area -->
+        <div class="player-area" id="opponent-area">
+            <div class="hero-stats" id="opponent-hero" onclick="handleTarget('opponent_hero')">
+                <span>Opponent: <span id="opp-name">AI</span></span>
+                <span style="color: #03dac6;">HP: <span id="opp-hp">30</span></span>
+                <span>Mana: <span id="opp-mana">0</span></span>
+            </div>
+            <div class="hand" id="opponent-hand">
+                <!-- Cards back -->
+            </div>
+            <div class="board" id="opponent-board">
+                <!-- Opponent Units -->
+            </div>
+        </div>
+
+        <!-- Info / Turn -->
+        <div class="turn-indicator">
+            <h2 id="turn-text">Turn 1</h2>
+            <button id="end-turn-btn" onclick="endTurn()">End Turn</button>
+            <div id="status-msg"></div>
+        </div>
+
+        <!-- Player Area -->
+        <div class="player-area" id="player-area">
+            <div class="board" id="player-board">
+                <!-- My Units -->
+            </div>
+            <div class="hand" id="player-hand">
+                <!-- My Cards -->
+            </div>
+            <div class="hero-stats" id="player-hero">
+                <span>Hero: <span id="my-name">Me</span></span>
+                <span style="color: #03dac6;">HP: <span id="my-hp">30</span></span>
+                <span>Mana: <span id="my-mana">0</span>/<span id="my-max-mana">0</span></span>
+            </div>
+        </div>
+
+        <div class="action-log" id="action-log"></div>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/game.js"></script>
+</body>
+</html>

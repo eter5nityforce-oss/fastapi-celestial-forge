@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestial Forge - Login</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Celestial Forge</h1>
+        <div id="auth-forms">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="handleLogin()">Enter the Forge</button>
+            <button onclick="toggleRegister()" style="background-color: transparent; border: 1px solid #bb86fc; color: #bb86fc;">Create Account</button>
+            <div id="message" class="error"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script>
+        let isRegistering = false;
+
+        function toggleRegister() {
+            isRegistering = !isRegistering;
+            document.querySelector("h2").innerText = isRegistering ? "Register" : "Login";
+            document.querySelector("button").innerText = isRegistering ? "Register" : "Enter the Forge";
+            document.querySelectorAll("button")[1].innerText = isRegistering ? "Back to Login" : "Create Account";
+        }
+
+        async function handleLogin() {
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+            const msg = document.getElementById("message");
+
+            try {
+                if (isRegistering) {
+                    await api.register(user, pass);
+                    alert("Registered! Now log in.");
+                    toggleRegister();
+                } else {
+                    await api.login(user, pass);
+                    window.location.href = "/static/lobby.html";
+                }
+            } catch (e) {
+                msg.innerText = e.message;
+            }
+        }
+    </script>
+</body>
+</html>
